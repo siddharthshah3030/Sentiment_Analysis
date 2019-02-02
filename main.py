@@ -68,23 +68,11 @@ features = vectorizer.fit_transform(clean_train_reviews)
 # array
 features = features.toarray()
 
+# using random forect for classification on test set
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+from sklearn.ensemble import RandomForestClassifier
+forest = RandomForestClassifier(n_estimators = 100) 
+forest = forest.fit( features, train["sentiment"] )
 
 
 

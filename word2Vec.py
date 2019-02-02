@@ -32,14 +32,46 @@ def review_to_wordlist( review, remove_stopwords=False ):
     # 5. Return a list of words
     return(words)
     
+import nltk.data
+
+# Load the punkt tokenizer
+tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+
+# Define a function to split a review into parsed sentences
+def review_to_sentences( review, tokenizer, remove_stopwords=False ):
+    # Function to split a review into parsed sentences. Returns a 
+    # list of sentences, where each sentence is a list of words
+    #
+    # 1. Use the NLTK tokenizer to split the paragraph into sentences
+    raw_sentences = tokenizer.tokenize(review.strip())
+    #
+    # 2. Loop over each sentence
+    sentences = []
+    for raw_sentence in raw_sentences:
+        # If a sentence is empty, skip it
+        if len(raw_sentence) > 0:
+            # Otherwise, call review_to_wordlist to get a list of words
+            sentences.append( review_to_wordlist( raw_sentence, \
+              remove_stopwords ))
+    #
+    # Return the list of sentences (each sentence is a list of words,
+    # so this returns a list of lists
+    return sentences
 
 
 
+sentences = []  # Initialize an empty list of sentences
+
+print ("Parsing sentences from training set")
+for review in train["review"]:
+    sentences += review_to_sentences(review, tokenizer)
+
+print ("Parsing sentences from unlabeled set")
+for review in unlabeled_train["review"]:
+    sentences += review_to_sentences(review, tokenizer)
 
 
-
-
-
+print( len(sentences))
 
 
 

@@ -1,10 +1,6 @@
 # Read the test data
 test = pd.read_csv("testData.tsv", header=0, delimiter="\t", \
                    quoting=3 )
-
-# Verify that there are 25,000 rows and 2 columns
-print test.shape
-
 # Create an empty list and append the clean reviews one by one
 num_reviews = len(test["review"])
 clean_test_reviews = [] 

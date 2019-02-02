@@ -22,7 +22,7 @@ testDataVecs = getAvgFeatureVecs( clean_test_reviews, model, num_features )
 from sklearn.ensemble import RandomForestClassifier
 forest = RandomForestClassifier( n_estimators = 100 )
 
-print "Fitting a random forest to labeled training data..."
+print( "Fitting a random forest to labeled training data...")
 forest = forest.fit( trainDataVecs, train["sentiment"] )
 
 # Test & extract results 

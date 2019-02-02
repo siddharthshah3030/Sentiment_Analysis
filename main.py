@@ -27,15 +27,15 @@ def clean(review):
     
     #print (letters_only)
     
-    
     lower_case = letters_only.lower()        # Convert to lower case
     words = lower_case.split()               # Split into words
     
     # nltk.download()  # Download text data sets, including stop words
+    stops = set(stopwords.words("english"))
     
     #print (stopwords.words("english") )
     # removes non relevant englis words from word
-    words = [w for w in words if not w in stopwords.words("english")]
+    words = [w for w in words if not w in stops]
     #print( words)
     return( " ".join( words ))   
     

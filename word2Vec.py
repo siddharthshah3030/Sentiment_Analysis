@@ -40,7 +40,7 @@ def getAvgFeatureVecs(reviews, model, num_features):
        #
        # Print a status message every 1000th review
        if counter%1000. == 0.:
-           print "Review %d of %d" % (counter, len(reviews))
+           print( "Review %d of %d" % (counter, len(reviews)))
        # 
        # Call the function (defined above) that makes average feature vectors
        reviewFeatureVecs[counter] = makeFeatureVec(review, model, \

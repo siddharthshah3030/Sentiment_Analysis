@@ -17,15 +17,15 @@ def clean(review):
     # beautifulSoup import and removal of HTML tags
     
     example1 = BeautifulSoup(train["review"][0])  
-    print(train["review"][0])
-    print(example1.get_text())
+    #print(train["review"][0])
+    #print(example1.get_text())
     
     #import re to remove numbers and other expressions except a-z
     letters_only = re.sub("[^a-zA-Z]",           # The pattern to search for
                           " ",                   # The pattern to replace it with
                           example1.get_text() )  # The text to search
     
-    print (letters_only)
+    #print (letters_only)
     
     
     lower_case = letters_only.lower()        # Convert to lower case
@@ -33,11 +33,58 @@ def clean(review):
     
     # nltk.download()  # Download text data sets, including stop words
     
-    print (stopwords.words("english") )
+    #print (stopwords.words("english") )
     # removes non relevant englis words from word
     words = [w for w in words if not w in stopwords.words("english")]
-    print( words)
+    #print( words)
     return( " ".join( words ))   
     
     
-clean("sid is hell")    
+clean("Damn awesome SID")    
+
+
+num_reviews = train["review"].size
+clean_train_reviews = []
+
+for i in range( 0, num_reviews ):
+    # Call our function for each one, and add the result to the list of
+    # clean reviews
+    clean_train_reviews.append( clean( train["review"][i] ) )
+
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Initialize the "CountVectorizer" object, which is scikit-learn's
+vectorizer = CountVectorizer(analyzer = "word",   \
+                             tokenizer = None,    \
+                             preprocessor = None, \
+                             stop_words = None,   \
+                             max_features = 5000) 
+
+
+features = vectorizer.fit_transform(clean_train_reviews)
+
+# Numpy arrays are easy to work with, so convert the result to an 
+# array
+features = features.toarray()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
